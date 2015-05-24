@@ -31,7 +31,7 @@ package tw.edu.npu.mis;
  *
  * @author Samael Wang <freesamael@gmail.com>
  */
-public class AlternativeView {
+public class AlternativeView implements Observer {
 
     private final String mName;
     private final Window mWindow;
@@ -57,6 +57,11 @@ public class AlternativeView {
         exchange = true;
     }
 
+    @Override
+    public void update() {
+       show();
+
+}
 }
 
 /**
