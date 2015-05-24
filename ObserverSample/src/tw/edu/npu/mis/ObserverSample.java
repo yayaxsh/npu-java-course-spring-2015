@@ -40,12 +40,18 @@ public class ObserverSample {
         Window window = new Window();
         Model model = new Model();
         Controller controller = new Controller(model);
-        List<View> views = new ArrayList<>();
-        views.add(new View("View 1", window, model));
-        views.add(new View("View 2", window, model));
-        views.add(new View("View 3", window, model));
+        List< Observer> banana = new ArrayList<>();
+       banana.add(new AlternativeView("View ", window, model));
+       
+        while (true) {
+            controller.readInput();
+            
+            for (Observer nn : banana) {
+                nn.update();
+            }
 
         // Start the event loop.
-        window.startEventLoop(controller, views);
+        
     }
+}
 }
