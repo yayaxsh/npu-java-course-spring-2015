@@ -33,11 +33,18 @@ package tw.edu.npu.mis;
  */
 public class AlternativeView implements Observer {
 
-    private final String mName;
-    private final Window mWindow;
+    private final String mName;      //private boolean mIsValid;
+    private final Window mWindow;    //private final Model mModel;
     private final Model mModel;
     private boolean exchange;
 
+ /**
+  * AlternativeView class 定義建構子
+  * @param name  
+  * @param window
+  * @param model 
+ */
+    
     public AlternativeView(String name, Window window, Model model) {
         mName = name;
         mWindow = window;
