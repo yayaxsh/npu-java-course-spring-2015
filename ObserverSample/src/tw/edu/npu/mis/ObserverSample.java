@@ -37,21 +37,27 @@ public class ObserverSample {
 
     public static void main(String[] args) {
         // Initialize MVC and Window objects.
-        Window window = new Window();
-        Model model = new Model();
-        Controller controller = new Controller(model);
+             Window window = new Window();
+         Model model = new Model();
+         Controller controller = new Controller(model);
+        List<View> views = new ArrayList<>();
+        views.add(new View("View 1", window, model));
+        views.add(new View("View 2", window, model));
+        views.add(new View("View 3", window, model));
         List< Observer> banana = new ArrayList<>();
-       banana.add(new AlternativeView("View ", window, model));
+        banana.add(new AlternativeView("View ", window, model));
        
-        while (true) {
+          while (true) {
             controller.readInput();
             
-            for (Observer nn : banana) {
+            banana.stream().map((nn) -> {
                 nn.update();
-            }
-
-        // Start the event loop.
-        
+                return nn;
+                 }).forEach((_item) -> {
+                     window.startEventLoop(controller, views);
+                 });
+                   // Start the event loop.
+        window.startEventLoop(controller, views);
+          }
     }
-}
 }
