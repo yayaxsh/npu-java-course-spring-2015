@@ -10,7 +10,7 @@ package tw.edu.npu.mis;
  */
 public class Calculator extends Subject {
     String s = "",a;
-    int count,count2;
+    int count,count2; double b;
     
     
     /**
@@ -33,7 +33,8 @@ public class Calculator extends Subject {
         MEM_SET,     // MS
         MEM_PLUS,    // M+
         MEM_MINUS,   // M-
-        MEM_RECALL   // MR
+        MEM_RECALL,   // MR
+        BACK
     }
     
     public void appendDigit(int digit) {
@@ -49,6 +50,81 @@ public class Calculator extends Subject {
     }
     
     public void performOperation(Operator operator) {
+        if(operator ==Operator.PERCENT)
+        {
+              switch(s)
+            {
+                case "":
+                    break;
+                default:
+                      if(operator ==Operator.PERCENT)
+                 {
+                     b = Double.parseDouble(s);
+                     b = b/100;
+                     s = String.valueOf(b);
+                     getDisplay();
+                 }
+                    break;
+            }
+        }
+           if(operator == Operator.PLUS_MINUS)
+        {
+            switch(s)
+            {
+                case "":
+                    break;
+                default:
+                 if(Double.parseDouble(s)>0)
+                  {          
+                       s = "-"+ s;
+                       getDisplay();
+                  }else{
+                       s =  String.valueOf(Math.abs(Double.parseDouble(s))) ;
+                        if(s.indexOf(".0")==s.length()-2)
+                        {
+                            s =  String.valueOf((int)Math.abs(Double.parseDouble(s))) ;
+                            getDisplay();
+                        } 
+                 }
+                    break;
+            }  
+        }
+           if(operator == Operator.CLEAR)
+        {
+            switch(s)
+            {
+                case "":
+                    break;
+                default:
+                s = "0";
+                getDisplay();
+                s ="";
+                    break;
+            }
+        }
+        if(operator == Operator.BACK)
+        {
+            switch(s)
+            {
+                case "":
+                    break;
+                default:
+               if(s.length()>0) {
+                    s = s.substring(0,s.length()-1);
+                    if(s.length()==0)
+                   {
+                        s= "0"; 
+                        getDisplay();
+                         s = "";
+                   }
+                    else
+                    {
+                        getDisplay();
+                    }
+               }
+                    break;
+            }
+        }
            if(operator == Operator.PLUS)
         {
           count = Integer.parseInt(s);
